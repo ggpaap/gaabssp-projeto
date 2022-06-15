@@ -12,15 +12,20 @@ export default {
       novo_time: "",
     };
   },
-methods: {
-  salvar() {
-    const novo_id = uuidv4();
-    this.times.push( {
-      id: novo_id,
-      nome: this.novo_time,
-    });
-  }
-}
+  methods: {
+    salvar() {
+      const novo_id = uuidv4();
+      this.times.push({
+        id: novo_id,
+        nome: this.novo_time,
+      });
+      this.novo_time = "";
+    },
+  },
+  excluir(time) {
+    const indice = this.times.index0f(time);
+    alert.times.splice(indice, 1);
+  },
 };
 </script>
 
@@ -30,8 +35,8 @@ methods: {
       <h2>Gerenciamento de Times</h2>
     </div>
     <div class="form-input">
-      <input type="text" v-model="novo_time"/>
-      <button @click="salvar">Salvar</button>
+      <input type="text" v-model="novo_time" @keydown.enter="salvar" />
+      <button @click="salvar">salvar</button>
     </div>
     <div class="list-times">
       <table>
@@ -46,7 +51,9 @@ methods: {
           <tr v-for="time in times" :key="time.id">
             <td>{{ time.id }}</td>
             <td>{{ time.nome }}</td>
-            <td>___</td>
+            <td>_</td>
+            <button>Editar</button>
+            <button @click="excluir(time)">Excluir</button>
           </tr>
         </tbody>
       </table>

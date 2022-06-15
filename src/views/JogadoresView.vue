@@ -8,20 +8,21 @@ export default {
         { id: "7662314f-0038-4e0c-886a-9a0334bdbab2", nome: "Jogador 2" },
         { id: "a2aa61b1-bc45-41d1-9b21-d84f4b94c3ad", nome: "Jogador 3" },
         { id: "a3f33a40-915f-4fa3-8624-13b63ea90a87", nome: "Jogador 4" },
-
       ],
       novo_time: "",
     };
   },
-methods: {
-  salvar() {
-    const novo_id = uuidv4();
-    this.times.push( {
-      id: novo_id,
-      nome: this.novo_time,
-    });
-  }
-}
+  methods: {
+    salvar() {
+      if (this.novo_time !== "") {
+        const novo_id = uuidv4();
+        this.times.push({
+          id: novo_id,
+          nome: this.novo_time,
+        });
+      }
+    },
+  },
 };
 </script>
 
@@ -31,8 +32,8 @@ methods: {
       <h2>Gerenciamento de Jogadores</h2>
     </div>
     <div class="form-input">
-      <input type="text" v-model="novo_jogador"/>
-      <button @click="salvar">Salvar</button>
+      <input type="text" v-model="novo_jogador" />
+      <button @click="adicionar">Adicionar</button>
     </div>
     <div class="list-tjogadores">
       <table>
@@ -47,7 +48,7 @@ methods: {
           <tr v-for="time in times" :key="time.id">
             <td>{{ time.id }}</td>
             <td>{{ time.nome }}</td>
-            <td>___</td>
+            <td>_</td>
           </tr>
         </tbody>
       </table>
